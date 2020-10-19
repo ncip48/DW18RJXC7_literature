@@ -1,0 +1,16 @@
+.about-book {
+  font-family: "Times New Roman";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  margin: 0px;
+}
+.p-about {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  text-align: justify;
+  color: #929292;
+  margin-top: 10px;
+}

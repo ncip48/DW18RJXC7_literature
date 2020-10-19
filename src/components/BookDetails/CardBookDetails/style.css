@@ -1,0 +1,41 @@
+.title {
+  font-family: "Times New Roman";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 54px;
+  margin: 0px;
+}
+.author {
+  font-family: "Avenir";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  color: #929292;
+  margin-bottom: 50px;
+}
+.detail-books h6 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+}
+.detail-books p {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  color: #929292;
+}
+.isbn {
+  color: #ee4622;
+}
+.isbn-p {
+  margin-bottom: 0px;
+}
+.img-books .thumbnail {
+  height: 500px;
+  width: 400px;
+}
+.thumbnail {
+  border-radius: 10px;
+}
