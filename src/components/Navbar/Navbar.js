@@ -126,7 +126,8 @@ export const Navbar = () => {
                     alignItems: "center",
                   }}
                 >
-                  <BiBookAdd size={22} style={{ marginRight: 10 }} /> Add Book
+                  <BiBookAdd size={22} style={{ marginRight: 10 }} /> Add
+                  Literature
                 </Dropdown.Item>
                 <hr style={{ margin: 0 }} />
                 <Dropdown.Item

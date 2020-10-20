@@ -5,6 +5,26 @@ import { FaRegBookmark } from "react-icons/fa";
 import { urlAsset } from "../../../config/api";
 
 export const CardBookDetails = (props) => {
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+
+  const setDate = new Date(props.publication);
+  const month = monthNames[setDate.getMonth()];
+  const split = props.publication.split("-");
+  const fullDate = split.pop() + " " + month + " " + split[0];
+
   return (
     <div
       className="card w-100"
@@ -33,7 +53,7 @@ export const CardBookDetails = (props) => {
 
           <h5 className="author">{props.author}</h5>
           <h6>Publication Date</h6>
-          <p>{props.publication}</p>
+          <p>{fullDate}</p>
           <h6>Pages</h6>
           <p>{props.pages}</p>
           <h6 className="isbn">ISBN</h6>

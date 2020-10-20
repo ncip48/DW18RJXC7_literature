@@ -26,7 +26,7 @@ export const CardBook = (props) => {
                 image={literature.thumbnail}
                 title={literature.title}
                 author={literature.author}
-                year={literature.publication_date.split(" ").pop()}
+                year={literature.publication_date.split("-")[0]}
               />
             ) : null;
           } else if (pathname === "literatures") {
@@ -38,7 +38,7 @@ export const CardBook = (props) => {
                 image={literature.thumbnail}
                 title={literature.title}
                 author={literature.author}
-                year={literature.publication_date.split(" ").pop()}
+                year={literature.publication_date.split("-")[0]}
               />
             ) : null;
           } else {
@@ -50,7 +50,7 @@ export const CardBook = (props) => {
                 image={literature.literatures.thumbnail}
                 title={literature.literatures.title}
                 author={literature.literatures.author}
-                year={literature.literatures.publication_date.split(" ").pop()}
+                year={literature.literatures.publication_date.split("-")[0]}
                 myown={props.isMeAuthor}
                 handleRemove={props.handleRemove()}
               />

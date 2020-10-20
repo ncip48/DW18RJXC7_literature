@@ -44,7 +44,7 @@ export const AddLiterature = () => {
       title: Yup.string().required().min(8),
       date: Yup.string().required().min(3),
       page: Yup.number().typeError().required().min(1),
-      isbn: Yup.number().typeError().required().min(1),
+      isbn: Yup.number().typeError().required().min(11),
       author: Yup.string().required().min(3),
       thumbnail: Yup.mixed()
         .required()
@@ -62,6 +62,7 @@ export const AddLiterature = () => {
         ),
     }),
     onSubmit: (values) => {
+      console.log(values);
       addBook(values);
       resetForm({ values: "" });
     },
@@ -100,7 +101,7 @@ export const AddLiterature = () => {
       <Navbar />
       <Wrapper>
         <h1 style={style.txtList} className="mb-4">
-          Add Book
+          Add Literature
         </h1>
         <form onSubmit={handleSubmit}>
           <CustomTextInput
@@ -112,7 +113,7 @@ export const AddLiterature = () => {
           />
           <CustomTextInput
             name="date"
-            type="text"
+            type="date"
             placeholder="Publication Date"
             {...getFieldProps("date")}
             error={touched.date ? errors.date : ""}
@@ -231,6 +232,7 @@ const style = {
     fontFamily: "Times New Roman",
     fontStyle: "normal",
     fontWeight: "bold",
+    fontSize: 34,
     color: "#ffffff",
   },
   popup: {

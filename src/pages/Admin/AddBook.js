@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Navbar, Wrapper } from "../../components/";
@@ -44,7 +44,7 @@ function AddBook() {
       title: Yup.string().required().min(8),
       date: Yup.string().required().min(3),
       page: Yup.number().typeError().required().min(1),
-      isbn: Yup.number().typeError().required().min(1),
+      isbn: Yup.number().typeError().required().min(11),
       author: Yup.string().required().min(3),
       thumbnail: Yup.mixed()
         .required()

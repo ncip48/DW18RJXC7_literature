@@ -47,13 +47,14 @@ function HomeAdmin() {
       <Navbar />
       <div className="container mt-5">
         <h1 className="mb-3" style={style.title}>
-          Book verification
+          Literature verification
         </h1>
         <table className="table text-white">
           <thead>
             <tr>
               <th>No</th>
               <th>Users of Author</th>
+              <th>Title</th>
               <th>ISBN</th>
               <th>E-book</th>
               <th>Status</th>
@@ -75,6 +76,9 @@ function HomeAdmin() {
                   <tr key={index}>
                     <th>{1 + index}</th>
                     <td>{book.author}</td>
+                    <td>
+                      <b>{book.title}</b>
+                    </td>
                     <td>{book.isbn}</td>
                     <td>{book.attache}</td>
                     <td
@@ -132,7 +136,7 @@ const style = {
     fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: 800,
-    fontSize: 30,
+    fontSize: 34,
     color: "#ffffff",
   },
 };
