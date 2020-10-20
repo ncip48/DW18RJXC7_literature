@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { useQuery, useMutation } from "react-query";
 import { API } from "../../config/api";
 import { FaRegBookmark } from "react-icons/fa";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CustomModal from "../../components/CustomModal";
 import { CardBookDetails, Navbar, Wrapper } from "../../components";
 
 export const DetailLiterature = () => {
   const { id } = useParams();
-  const history = useHistory();
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -50,8 +49,13 @@ export const DetailLiterature = () => {
               pages={booksData.data.data.literature.pages}
               ISBN={booksData.data.data.literature.isbn}
               thumbnail={booksData.data.data.literature.thumbnail}
+              file={booksData.data.data.literature.attache}
+              onCollection={() => {
+                addLibraryAction(booksData.data.data.literature.id);
+                setShow(true);
+              }}
             />
-            <div className="d-flex justify-content-end">
+            {/* <div className="d-flex justify-content-end">
               <button
                 type="button"
                 className="btn btn-primary mx-2"
@@ -63,7 +67,7 @@ export const DetailLiterature = () => {
               >
                 Add My Collection <FaRegBookmark />
               </button>
-            </div>
+            </div> */}
           </>
         )}
       </Wrapper>
@@ -81,6 +85,6 @@ const style = {
     fontWeight: "normal",
     fontSize: 20,
     textAlign: "center",
-    color: "#469F74",
+    color: "#ffffff",
   },
 };

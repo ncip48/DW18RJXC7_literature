@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { BsCloudDownload } from "react-icons/bs";
+import { FaRegBookmark } from "react-icons/fa";
 import { urlAsset } from "../../../config/api";
 
 export const CardBookDetails = (props) => {
@@ -18,7 +19,18 @@ export const CardBookDetails = (props) => {
           />
         </div>
         <div className="col-md-8 d-flex justify-content flex-column justify-content-between detail-books">
-          <h1 className="title">{props.title}</h1>
+          <div className="d-flex justify-content-between">
+            <h1 className="title">{props.title}</h1>
+            <button
+              type="button"
+              className="btn btn-primary mx-2"
+              style={{ backgroundColor: "#AF2E1C", height: 50 }}
+              onClick={props.onCollection}
+            >
+              Add My Collection <FaRegBookmark />
+            </button>
+          </div>
+
           <h5 className="author">{props.author}</h5>
           <h6>Publication Date</h6>
           <p>{props.publication}</p>
@@ -26,13 +38,13 @@ export const CardBookDetails = (props) => {
           <p>{props.pages}</p>
           <h6 className="isbn">ISBN</h6>
           <p className="isbn-p">{props.ISBN}</p>
-          <button
-            type="button"
-            className="btn btn-primary"
+          <a
+            className="btn btn-primary d-flex justify-content-center align-items-center"
             style={{ backgroundColor: "#AF2E1C", height: 50, width: 145 }}
+            href={urlAsset.books + props.file}
           >
             Download <BsCloudDownload />
-          </button>
+          </a>
         </div>
       </div>
     </div>
