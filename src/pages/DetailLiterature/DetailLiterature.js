@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useQuery, useMutation } from "react-query";
 import { API } from "../../config/api";
-import { FaRegBookmark } from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import CustomModal from "../../components/CustomModal";
 import { CardBookDetails, Navbar, Wrapper } from "../../components";
@@ -15,16 +14,16 @@ export const DetailLiterature = () => {
     API.get(`/literature/${id}`)
   );
 
-  const [addLibraryAction] = useMutation(async (bookId) => {
+  const [addCollection] = useMutation(async (literatureId) => {
     try {
       const config = {
         headers: {
           "Content-Type": "application/json",
         },
       };
-      const body = JSON.stringify({ bookId: bookId });
+      const body = JSON.stringify({ literatureId: literatureId });
 
-      const res = await API.post("/literature", body, config);
+      const res = await API.post(`/collection/`, body, config);
       setMessage(res.data.message);
     } catch (err) {
       console.log(err);
@@ -51,23 +50,10 @@ export const DetailLiterature = () => {
               thumbnail={booksData.data.data.literature.thumbnail}
               file={booksData.data.data.literature.attache}
               onCollection={() => {
-                addLibraryAction(booksData.data.data.literature.id);
+                addCollection(booksData.data.data.literature.id);
                 setShow(true);
               }}
             />
-            {/* <div className="d-flex justify-content-end">
-              <button
-                type="button"
-                className="btn btn-primary mx-2"
-                style={{ backgroundColor: "#AF2E1C" }}
-                onClick={() => {
-                  addLibraryAction(booksData.data.data.literature.id);
-                  setShow(true);
-                }}
-              >
-                Add My Collection <FaRegBookmark />
-              </button>
-            </div> */}
           </>
         )}
       </Wrapper>

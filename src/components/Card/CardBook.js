@@ -15,53 +15,44 @@ export const CardBook = (props) => {
           <h3>No Literatures Found</h3>
         </div>
       ) : (
-        props.dataBook.map((book, index) => {
+        props.dataBook.map((literature, index) => {
+          console.log(literature.literatures);
           if (pathname === "profile") {
-            return book.status !== "Canceled" ? (
+            return literature.status !== "Canceled" ? (
               <ListBook
-                isactive={book.status === "Waiting" ? false : true}
+                isactive={literature.status === "Waiting" ? false : true}
                 key={index}
-                index={props.isMeAuthor ? book.books.id : book.id}
-                image={props.isMeAuthor ? book.books.thumbnail : book.thumbnail}
-                title={props.isMeAuthor ? book.books.title : book.title}
-                author={
-                  props.author
-                    ? props.author
-                    : props.isMeAuthor
-                    ? book.books.userId.fullName
-                    : book.author
-                }
-                year={
-                  props.isMeAuthor
-                    ? book.books.publication_date.split(" ").pop()
-                    : book.publication_date.split(" ").pop()
-                }
-                myown={props.isMeAuthor}
-                handleRemove={props.handleRemove}
+                index={literature.id}
+                image={literature.thumbnail}
+                title={literature.title}
+                author={literature.author}
+                year={literature.publication_date.split(" ").pop()}
               />
             ) : null;
-          } else {
-            return book.status === "Approved" ? (
+          } else if (pathname === "literatures") {
+            return literature.status === "Approved" ? (
               <ListBook
                 isactive
                 key={index}
-                index={props.isMeAuthor ? book.books.id : book.id}
-                image={props.isMeAuthor ? book.books.thumbnail : book.thumbnail}
-                title={props.isMeAuthor ? book.books.title : book.title}
-                author={
-                  props.author
-                    ? props.author
-                    : props.isMeAuthor
-                    ? book.books.userId.fullName
-                    : book.author
-                }
-                year={
-                  props.isMeAuthor
-                    ? book.books.publication_date.split(" ").pop()
-                    : book.publication_date.split(" ").pop()
-                }
+                index={literature.id}
+                image={literature.thumbnail}
+                title={literature.title}
+                author={literature.author}
+                year={literature.publication_date.split(" ").pop()}
+              />
+            ) : null;
+          } else {
+            return literature.literatures.status === "Approved" ? (
+              <ListBook
+                isactive
+                key={index}
+                index={literature.literatures.id}
+                image={literature.literatures.thumbnail}
+                title={literature.literatures.title}
+                author={literature.literatures.author}
+                year={literature.literatures.publication_date.split(" ").pop()}
                 myown={props.isMeAuthor}
-                handleRemove={props.handleRemove}
+                handleRemove={props.handleRemove()}
               />
             ) : null;
           }
