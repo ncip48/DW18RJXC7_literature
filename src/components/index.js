@@ -5,3 +5,4 @@ export * from "./Auth/";
 export * from "./Form/";
 export * from "./Card";
 export * from "./SearchBar";
+export * from "./BookDetails";

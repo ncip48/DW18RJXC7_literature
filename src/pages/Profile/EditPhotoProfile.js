@@ -76,7 +76,7 @@ export const EditPhotoProfile = (props) => {
             <button
               className="btn btn-no"
               type="submit"
-              style={{ backgroundColor: "#EE4622", color: "#ffffff" }}
+              style={{ backgroundColor: "#AF2E1C", color: "#ffffff" }}
             >
               Submit
             </button>

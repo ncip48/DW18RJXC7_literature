@@ -84,7 +84,7 @@ export const CardProfile = (props) => {
                     style={{
                       display: "flex",
                       height: 50,
-                      backgroundColor: "#EE4622",
+                      backgroundColor: "#AF2E1C",
                       color: "#ffffff",
                       alignItems: "center",
                     }}

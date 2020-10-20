@@ -167,7 +167,7 @@ export const Register = (props) => {
           style={{
             marginBottom: 20,
             marginTop: 20,
-            backgroundColor: "#EE4622",
+            backgroundColor: "#AF2E1C",
           }}
         >
           {isLoading ? (
@@ -186,7 +186,10 @@ export const Register = (props) => {
       </form>
       <h6 style={style.style_3}>
         Already have an account ? Klik{" "}
-        <b style={{ cursor: "pointer" }} onClick={props.onClickLogin}>
+        <b
+          style={{ cursor: "pointer", color: "#AF2E1C" }}
+          onClick={props.onClickLogin}
+        >
           Here
         </b>
       </h6>

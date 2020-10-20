@@ -65,7 +65,9 @@ export const ListBook = ({
           X
         </div>
       ) : null}
-      <div onClick={() => (isactive ? history.push(`/book/${index}`) : null)}>
+      <div
+        onClick={() => (isactive ? history.push(`/literature/${index}`) : null)}
+      >
         <img
           alt="books"
           className="figure-img img-fluid"

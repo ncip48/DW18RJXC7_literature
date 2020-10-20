@@ -6,8 +6,14 @@ import AdminRoute from "./components/AdminRoute";
 import { API, setAuthToken } from "./config/api";
 import { UserContext } from "./context/userContext";
 
-import { Landing, Home, Profile, MyCollection, Literature } from "./pages";
-import Book from "./pages/Book";
+import {
+  Landing,
+  Home,
+  Profile,
+  MyCollection,
+  Literature,
+  DetailLiterature,
+} from "./pages";
 import AddBook from "./pages/AddBook";
 import HomeAdmin from "./pages/Admin/HomeAdmin";
 import AddBookAdmin from "./pages/Admin/AddBook";
@@ -43,9 +49,9 @@ const App = () => {
         <PrivateRoute path="/dashboard" component={Home} />
         <PrivateRoute path="/profile" component={Profile} />
         <PrivateRoute path="/my-collection" component={MyCollection} />
-        <PrivateRoute path="/literature" component={Literature} />
+        <PrivateRoute path="/literatures" component={Literature} />
+        <PrivateRoute path="/literature/:id" component={DetailLiterature} />
         <PrivateRoute path="/add-book" component={AddBook} />
-        <PrivateRoute path="/book/:id" component={Book} />
         <AdminRoute path="/admin/add-book" component={AddBookAdmin} />
         <AdminRoute path="/admin" component={HomeAdmin} />
         <Route exact path="/" component={Landing} />

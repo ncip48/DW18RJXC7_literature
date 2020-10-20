@@ -117,7 +117,11 @@ export const Literature = () => {
             {isLoading ? (
               <h3 className="text-white">loading...</h3>
             ) : (
-              <CardBook loading={isLoading} dataBook={result} />
+              <CardBook
+                loading={isLoading}
+                dataBook={result}
+                isMeAuthor={false}
+              />
             )}
           </div>
         </div>

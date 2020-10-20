@@ -104,7 +104,7 @@ export const Login = (props) => {
         <button
           type="submit"
           className="btn btn-danger btn-block"
-          style={{ marginBottom: 20, backgroundColor: "#EE4622" }}
+          style={{ marginBottom: 20, backgroundColor: "#AF2E1C" }}
         >
           {isLoading ? (
             <>
@@ -122,7 +122,10 @@ export const Login = (props) => {
       </form>
       <h6 style={style.textBottom}>
         Don't have an account ? Klik{" "}
-        <b style={{ cursor: "pointer" }} onClick={props.onCliCkRegister}>
+        <b
+          style={{ cursor: "pointer", color: "#AF2E1C" }}
+          onClick={props.onCliCkRegister}
+        >
           Here
         </b>
       </h6>

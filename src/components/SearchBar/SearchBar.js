@@ -22,7 +22,7 @@ export const SearchBar = (props) => {
         style={{ width: 50 }}
         onClick={() =>
           history.push({
-            pathname: "/literature",
+            pathname: "/literatures",
             state: {
               query: query,
             },
