@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navbar, Wrapper, CardBook } from "../../components";
-import { ListBook } from "../../components/ListBook";
 import CustomModal from "../../components/CustomModal";
 import { useQuery, useMutation } from "react-query";
 import { API } from "../../config/api";
@@ -43,40 +42,8 @@ export const MyCollection = () => {
           <CardBook
             loading={isLoading}
             dataBook={libraryData?.data?.data?.library}
-            isMeAuthor
+            handleRemove={removeLibraryAction()}
           />
-          <div className="row">
-            {isLoading ? (
-              <h1>Loading...</h1>
-            ) : error ? (
-              <h3>Error</h3>
-            ) : libraryData.data.data.library.toString() === "" ? (
-              <div
-                className="alert alert-warning ml-auto mr-auto w-100 text-center"
-                role="alert"
-              >
-                <h3>No Library Found</h3>
-              </div>
-            ) : (
-              libraryData.data.data.library.map((book, index) => {
-                return book.books.status === "Approved" ? (
-                  <ListBook
-                    isactive
-                    key={index}
-                    index={book.books.id}
-                    image={book.books.thumbnail}
-                    title={book.books.title}
-                    author={book.books.userId.fullName}
-                    myown
-                    handleRemove={() => {
-                      removeLibraryAction(book.books.id);
-                      setShow(true);
-                    }}
-                  />
-                ) : null;
-              })
-            )}
-          </div>
         </div>
       </Wrapper>
       <CustomModal show={show} onHide={() => setShow(false)}>

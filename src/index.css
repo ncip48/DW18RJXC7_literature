@@ -133,3 +133,10 @@ input[type="number"]:focus,
 .navbar-dark .navbar-nav .nav-link:hover {
   color: #af2e1c !important;
 }
+
+option:not(:checked),
+select option {
+  background-color: rgba(210, 210, 210, 0.945) !important;
+  color: #000000 !important;
+  border: 2px solid #bcbcbc;
+}

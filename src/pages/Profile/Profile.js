@@ -41,10 +41,14 @@ export const Profile = () => {
         <div className="d-flex justify-content-between">
           <h1 style={style.txtList}>My Literature</h1>
         </div>
-        <CardBook
-          loading={isLoading}
-          dataBook={booksProfile?.data?.data?.literature}
-        />
+        {isLoading ? (
+          <h3 className="text-white">loading...</h3>
+        ) : (
+          <CardBook
+            loading={isLoading}
+            dataBook={booksProfile.data.data.literatures}
+          />
+        )}
       </Wrapper>
       <CustomModal
         title="Edit Photo Profile"

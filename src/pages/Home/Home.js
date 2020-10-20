@@ -1,6 +1,5 @@
 import React from "react";
-import { Navbar, TextInput } from "../../components";
-import { BsSearch } from "react-icons/bs";
+import { Navbar, SearchBar } from "../../components";
 import "./style.css";
 
 export const Home = () => {
@@ -17,18 +16,7 @@ export const Home = () => {
                 src={require("../../assets/img/bg2.png")}
                 alt=""
               />
-              <div className=" d-flex flex-row" style={{ marginTop: 50 }}>
-                <TextInput
-                  name="literature"
-                  type="text"
-                  placeholder="Search for literature"
-                  css={{ margin: 0, marginRight: 10, width: "90%" }}
-                  style={{ height: 50, margin: 0 }}
-                />
-                <button className="btn btn-no btn-sign-up">
-                  <BsSearch />
-                </button>
-              </div>
+              <SearchBar />
             </div>
             <div className="col-md-3 col-12"></div>
           </div>
