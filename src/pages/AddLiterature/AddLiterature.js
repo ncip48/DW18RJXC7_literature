@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { useMutation } from "react-query";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { Navbar, Wrapper } from "../../components";
 import { CgAttachment } from "react-icons/cg";
 import CustomModal from "../../components/CustomModal";
@@ -35,10 +33,9 @@ export const AddLiterature = () => {
     initialValues: {
       title: "",
       date: "",
-      category: "",
       page: "",
       isbn: "",
-      about: "About This Book",
+      author: "",
       thumbnail: "",
       attache: "",
     },
@@ -46,10 +43,9 @@ export const AddLiterature = () => {
     validationSchema: Yup.object().shape({
       title: Yup.string().required().min(8),
       date: Yup.string().required().min(3),
-      category: Yup.string().required(),
       page: Yup.number().typeError().required().min(1),
       isbn: Yup.number().typeError().required().min(1),
-      about: Yup.string().required().min(8),
+      author: Yup.string().required().min(3),
       thumbnail: Yup.mixed()
         .required()
         .test(
@@ -81,16 +77,15 @@ export const AddLiterature = () => {
 
       var formData = new FormData();
       formData.append("title", values.title);
-      formData.append("publication", values.date);
-      formData.append("id_category", values.category);
+      formData.append("publication_date", values.date);
       formData.append("pages", values.page);
-      formData.append("ISBN", values.isbn);
-      formData.append("aboutBook", values.about);
+      formData.append("author", values.author);
+      formData.append("isbn", values.isbn);
       formData.append("thumbnail", values.thumbnail);
-      formData.append("file", values.book);
+      formData.append("attache", values.attache);
       formData.append("status", "");
 
-      const res = await API.post("/book", formData, config);
+      const res = await API.post("/literature", formData, config);
       setMessage(res.data.message);
       setShow(true);
     } catch (err) {
@@ -136,36 +131,20 @@ export const AddLiterature = () => {
             {...getFieldProps("isbn")}
             error={touched.isbn ? errors.isbn : ""}
           />
-          <div className="form-group" style={{ marginTop: 20 }}>
-            <CKEditor
-              editor={ClassicEditor}
-              data={values.about}
-              style={{ height: 200 }}
-              onInit={(editor) => {
-                editor.editing.view.change((writer) => {
-                  writer.setStyle(
-                    "height",
-                    "200px",
-                    editor.editing.view.document.getRoot()
-                  );
-                });
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setFieldValue("about", data);
-              }}
-            />
-            <span className="help-block text-danger">
-              {touched.about ? errors.about : ""}
-            </span>
-          </div>
+          <CustomTextInput
+            name="author"
+            type="text"
+            placeholder="Author"
+            {...getFieldProps("author")}
+            error={touched.author ? errors.author : ""}
+          />
           <div className="form-group" style={{ marginTop: 20 }}>
             <label
               htmlFor="thumbnail"
               style={{
                 display: "flex",
                 alignItems: "center",
-                width: 218,
+                width: 245,
                 padding: 10,
                 border: "2px solid #BCBCBC",
                 backgroundColor: "rgba(210, 210, 210, 0.25)",
@@ -192,6 +171,7 @@ export const AddLiterature = () => {
               {touched.thumbnail ? errors.thumbnail : ""}
             </span>
           </div>
+
           <div className="form-group" style={{ marginTop: 20 }}>
             <label
               htmlFor="file"
@@ -214,14 +194,14 @@ export const AddLiterature = () => {
               type="file"
               className="form-control-file"
               id="file"
-              name="book"
+              name="attache"
               style={{ display: "none" }}
               onChange={(e) => {
-                setFieldValue("book", e.target.files[0]);
+                setFieldValue("attache", e.target.files[0]);
               }}
             />
             <span className="help-block text-danger">
-              {touched.book ? errors.book : ""}
+              {touched.attache ? errors.attache : ""}
             </span>
           </div>
           <div className="d-flex justify-content-end">

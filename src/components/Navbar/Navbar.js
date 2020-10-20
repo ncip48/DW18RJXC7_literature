@@ -47,12 +47,24 @@ export const Navbar = () => {
                     Profile
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={
+                    pathname === "my-collection"
+                      ? "nav-item active"
+                      : "nav-item"
+                  }
+                >
                   <Link className="nav-link" to="/my-collection">
                     My Collection
                   </Link>
                 </li>
-                <li className="nav-item">
+                <li
+                  className={
+                    pathname === "add-literature"
+                      ? "nav-item active"
+                      : "nav-item"
+                  }
+                >
                   <Link className="nav-link" to="/add-literature">
                     Add Literature
                   </Link>

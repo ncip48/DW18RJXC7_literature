@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import CKEditor from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { Navbar } from "../../components/Navbar/";
+import { Navbar, Wrapper } from "../../components/";
 import { CgAttachment } from "react-icons/cg";
 import CustomModal from "../../components/CustomModal";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -13,9 +11,7 @@ import { API } from "../../config/api";
 
 function AddBook() {
   const [show, setShow] = useState(false);
-  const [showCategory, setShowCategory] = useState(false);
   const [message, setMessage] = useState("");
-  const [category, setCategory] = useState("");
 
   const SUPPORTED_FORMATS_IMAGE = [
     "image/jpg",
@@ -24,11 +20,6 @@ function AddBook() {
     "image/png",
   ];
   const SUPPORTED_FORMATS_BOOK = ["application/pdf", "application/epub+zip"];
-
-  const { isLoading, data: categoryData, refetch } = useQuery(
-    "getCategoryBook",
-    async () => await API.get("/categories")
-  );
 
   const {
     handleSubmit,
@@ -42,21 +33,19 @@ function AddBook() {
     initialValues: {
       title: "",
       date: "",
-      category: "",
       page: "",
       isbn: "",
-      about: "",
+      author: "",
       thumbnail: "",
-      book: "",
+      attache: "",
     },
     validateOnBlur: true,
     validationSchema: Yup.object().shape({
       title: Yup.string().required().min(8),
       date: Yup.string().required().min(3),
-      category: Yup.string().required(),
       page: Yup.number().typeError().required().min(1),
       isbn: Yup.number().typeError().required().min(1),
-      about: Yup.string().required().min(8),
+      author: Yup.string().required().min(3),
       thumbnail: Yup.mixed()
         .required()
         .test(
@@ -64,7 +53,7 @@ function AddBook() {
           "Sorry only accept image filetype",
           (value) => value && SUPPORTED_FORMATS_IMAGE.includes(value.type)
         ),
-      book: Yup.mixed()
+      attache: Yup.mixed()
         .required()
         .test(
           "fileFormat",
@@ -85,23 +74,18 @@ function AddBook() {
           "Content-Type": "multipart/form-data",
         },
       };
+
       var formData = new FormData();
       formData.append("title", values.title);
-      formData.append("publication", values.date);
-      formData.append("id_category", values.category);
+      formData.append("publication_date", values.date);
       formData.append("pages", values.page);
-      formData.append("ISBN", values.isbn);
-      formData.append("aboutBook", values.about);
+      formData.append("author", values.author);
+      formData.append("isbn", values.isbn);
       formData.append("thumbnail", values.thumbnail);
-      formData.append("file", values.book);
+      formData.append("attache", values.attache);
       formData.append("status", "");
 
-      // for (var value of formData.values()) {
-      //   console.log(value);
-      // }
-
-      const res = await API.post("/book", formData, config);
-      //console.log(res.data);
+      const res = await API.post("/literature", formData, config);
       setMessage(res.data.message);
       setShow(true);
     } catch (err) {
@@ -111,27 +95,10 @@ function AddBook() {
     }
   });
 
-  const [addCategoryAction] = useMutation(async () => {
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      const body = JSON.stringify({ name: category });
-      //console.log(body);
-      await API.post("/category", body, config);
-      refetch();
-      setShowCategory(false);
-    } catch (err) {
-      console.log(err.message);
-    }
-  });
-
   return (
     <>
       <Navbar />
-      <div className="container mt-5">
+      <Wrapper>
         <h1 style={style.txtList} className="mb-4">
           Add Book
         </h1>
@@ -150,31 +117,6 @@ function AddBook() {
             {...getFieldProps("date")}
             error={touched.date ? errors.date : ""}
           />
-          <select
-            className="form-control"
-            name="category"
-            style={style.inputGender}
-            {...getFieldProps("category")}
-          >
-            <option>Select category</option>
-            {isLoading ? (
-              <option>Loading</option>
-            ) : (
-              categoryData.data.data.categories.map((category, index) => {
-                return (
-                  <option value={category.id} key={index}>
-                    {category.name}
-                  </option>
-                );
-              })
-            )}
-          </select>
-          <span className="help-block text-danger">
-            {touched.category ? errors.category : ""}
-          </span>
-          <a href="#add" onClick={() => setShowCategory(true)}>
-            <span>+ add category</span>
-          </a>
           <CustomTextInput
             name="page"
             type="text"
@@ -189,56 +131,30 @@ function AddBook() {
             {...getFieldProps("isbn")}
             error={touched.isbn ? errors.isbn : ""}
           />
-          {/* <textarea
-            className="form-control"
-            name="about"
-            style={{ marginTop: 15, height: 200 }}
-            placeholder="About This Book"
-            {...getFieldProps("about")}
-            //error={touched.about ? errors.about : ""}
-          /> */}
-          <div className="form-group" style={{ marginTop: 20 }}>
-            <CKEditor
-              editor={ClassicEditor}
-              data="About This Book"
-              style={{ height: 200 }}
-              onInit={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                //console.log("Editor is ready to use!", editor);
-                editor.editing.view.change((writer) => {
-                  writer.setStyle(
-                    "height",
-                    "200px",
-                    editor.editing.view.document.getRoot()
-                  );
-                });
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                setFieldValue("about", data);
-              }}
-            />
-            <span className="help-block text-danger">
-              {touched.about ? errors.about : ""}
-            </span>
-          </div>
+          <CustomTextInput
+            name="author"
+            type="text"
+            placeholder="Author"
+            {...getFieldProps("author")}
+            error={touched.author ? errors.author : ""}
+          />
           <div className="form-group" style={{ marginTop: 20 }}>
             <label
               htmlFor="thumbnail"
               style={{
                 display: "flex",
                 alignItems: "center",
-                width: 218,
+                width: 245,
                 padding: 10,
                 border: "2px solid #BCBCBC",
                 backgroundColor: "rgba(210, 210, 210, 0.25)",
-                color: "#333333",
+                color: "#ffffff",
               }}
             >
-              <CgAttachment size={30} color="#333333" />{" "}
+              <CgAttachment size={30} color="#ffffff" />{" "}
               {values.thumbnail.name
                 ? values.thumbnail.name
-                : "Attache Book Image"}
+                : "Attache Literature Image"}
             </label>
             <input
               type="file"
@@ -255,6 +171,7 @@ function AddBook() {
               {touched.thumbnail ? errors.thumbnail : ""}
             </span>
           </div>
+
           <div className="form-group" style={{ marginTop: 20 }}>
             <label
               htmlFor="file"
@@ -265,25 +182,26 @@ function AddBook() {
                 padding: 10,
                 border: "2px solid #BCBCBC",
                 backgroundColor: "rgba(210, 210, 210, 0.25)",
-                color: "#333333",
+                color: "#ffffff",
               }}
             >
-              <CgAttachment size={30} color="#333333" />{" "}
-              {values.book.name ? values.book.name : "Attache Book File"}
+              <CgAttachment size={30} color="#ffffff" />{" "}
+              {values.attache.name
+                ? values.attache.name
+                : "Attache Literature File"}
             </label>
             <input
               type="file"
               className="form-control-file"
               id="file"
-              name="book"
+              name="attache"
               style={{ display: "none" }}
-              //onBlur={handleBlur}
               onChange={(e) => {
-                setFieldValue("book", e.target.files[0]);
+                setFieldValue("attache", e.target.files[0]);
               }}
             />
             <span className="help-block text-danger">
-              {touched.book ? errors.book : ""}
+              {touched.attache ? errors.attache : ""}
             </span>
           </div>
           <div className="d-flex justify-content-end">
@@ -296,35 +214,9 @@ function AddBook() {
             </button>
           </div>
         </form>
-      </div>
+      </Wrapper>
       <CustomModal show={show} onHide={() => setShow(false)}>
         <h5 style={style.popup}>{message}</h5>
-      </CustomModal>
-      <CustomModal show={showCategory} onHide={() => setShowCategory(false)}>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            addCategoryAction();
-          }}
-        >
-          <CustomTextInput
-            name="category"
-            type="text"
-            placeholder="Name category"
-            value={category}
-            onChange={(e) => {
-              e.preventDefault();
-              setCategory(e.target.value);
-            }}
-          />
-          <button
-            type="submit"
-            className="btn btn-danger btn-block"
-            style={{ marginBottom: 20, backgroundColor: "#EE4622" }}
-          >
-            Add Category
-          </button>
-        </form>
       </CustomModal>
     </>
   );
@@ -335,13 +227,14 @@ const style = {
     fontFamily: "Times New Roman",
     fontStyle: "normal",
     fontWeight: "bold",
+    color: "#ffffff",
   },
   popup: {
     fontFamily: "Poppins",
     fontStyle: "normal",
     fontWeight: "normal",
     fontSize: 18,
-    color: "#469F74",
+    color: "#ffffff",
     margin: 0,
     textAlign: "center",
   },

@@ -5,10 +5,12 @@ import { Navbar } from "../../components/Navbar/";
 import { HiCheckCircle, HiXCircle } from "react-icons/hi";
 
 function HomeAdmin() {
-  const { isLoading, error, data: booksData, refetch } = useQuery(
-    "getBookAll",
-    () => API.get(`/books`)
-  );
+  const {
+    isLoading,
+    error,
+    data: literatureData,
+    refetch,
+  } = useQuery("getLiteratureAll", () => API.get(`/literatures`));
 
   const [approveBook] = useMutation(async (id) => {
     try {
@@ -18,7 +20,7 @@ function HomeAdmin() {
         },
       };
       const body = JSON.stringify({ status: "Approved" });
-      await API.patch(`/book/${id}`, body, config);
+      await API.patch(`/literature/${id}`, body, config);
       refetch();
     } catch (err) {
       console.log(err.message);
@@ -33,7 +35,7 @@ function HomeAdmin() {
         },
       };
       const body = JSON.stringify({ status: "Canceled" });
-      await API.patch(`/book/${id}`, body, config);
+      await API.patch(`/literature/${id}`, body, config);
       refetch();
     } catch (err) {
       console.log(err.message);
@@ -47,7 +49,7 @@ function HomeAdmin() {
         <h1 className="mb-3" style={style.title}>
           Book verification
         </h1>
-        <table className="table">
+        <table className="table text-white">
           <thead>
             <tr>
               <th>No</th>
@@ -66,15 +68,15 @@ function HomeAdmin() {
                 </td>
               </tr>
             ) : error ? (
-              <h3>Error</h3>
+              <h3>Error {error.message}</h3>
             ) : (
-              booksData.data.data.books.map((book, index) => {
+              literatureData.data.data.literatures.map((book, index) => {
                 return (
                   <tr key={index}>
                     <th>{1 + index}</th>
-                    <td>{book.userId.fullName}</td>
-                    <td>{book.ISBN}</td>
-                    <td>{book.file}</td>
+                    <td>{book.author}</td>
+                    <td>{book.isbn}</td>
+                    <td>{book.attache}</td>
                     <td
                       style={{
                         color:
@@ -131,6 +133,7 @@ const style = {
     fontStyle: "normal",
     fontWeight: 800,
     fontSize: 30,
+    color: "#ffffff",
   },
 };
 
