@@ -13,8 +13,8 @@ import {
   MyCollection,
   Literature,
   DetailLiterature,
+  AddLiterature,
 } from "./pages";
-import AddBook from "./pages/AddBook";
 import HomeAdmin from "./pages/Admin/HomeAdmin";
 import AddBookAdmin from "./pages/Admin/AddBook";
 
@@ -51,7 +51,7 @@ const App = () => {
         <PrivateRoute path="/my-collection" component={MyCollection} />
         <PrivateRoute path="/literatures" component={Literature} />
         <PrivateRoute path="/literature/:id" component={DetailLiterature} />
-        <PrivateRoute path="/add-book" component={AddBook} />
+        <PrivateRoute path="/add-literature" component={AddLiterature} />
         <AdminRoute path="/admin/add-book" component={AddBookAdmin} />
         <AdminRoute path="/admin" component={HomeAdmin} />
         <Route exact path="/" component={Landing} />

@@ -66,7 +66,7 @@ export const MyCollection = () => {
                     myown
                     handleRemove={() => {
                       setShow(true);
-                      removeLibraryAction(literature.literatures.id);
+                      removeLibraryAction(literature.id);
                     }}
                   />
                 ) : null;

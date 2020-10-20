@@ -4,3 +4,4 @@ export * from "./Profile/";
 export * from "./MyCollection/";
 export * from "./Literature/";
 export * from "./DetailLiterature/";
+export * from "./AddLiterature/";
