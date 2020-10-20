@@ -24,24 +24,59 @@ export const Navbar = () => {
       <img src={require("../../assets/img/icon.png")} className="logo" alt="" />
     </nav>
   ) : (
-    <nav className="navbar navbar-light nav-profile">
+    <nav className="navbar navbar-dark nav-profile navbar navbar-expand-lg">
       <div className="container">
-        <div
-          className={
-            pathname === "admin"
-              ? "col-md-3 d-flex w-100"
-              : "col-md-3 d-flex w-100"
-          }
-        >
-          <Link to={pathname === "admin" ? "/admin" : "/dashboard"}>
-            <img
-              src={require("../../assets/img/icon.png")}
-              className="logo"
-              alt=""
-            />
-          </Link>
+        <div className="col-md-6 w-100">
+          {pathname === "admin" ? (
+            <Link to={pathname === "admin" ? "/admin" : "/dashboard"}>
+              <img
+                src={require("../../assets/img/icon.png")}
+                className="logo"
+                alt=""
+              />
+            </Link>
+          ) : (
+            <>
+              <ul className="navbar-nav">
+                <li
+                  className={
+                    pathname === "profile" ? "nav-item active" : "nav-item"
+                  }
+                >
+                  <Link className="nav-link" to="/profile">
+                    Profile
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/my-collection">
+                    My Collection
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/add-literature">
+                    Add Literature
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  {state.isLogin ? (
+                    <a
+                      className="nav-link"
+                      href="#logout"
+                      onClick={() =>
+                        dispatch({
+                          type: "LOGOUT",
+                        })
+                      }
+                    >
+                      Logout
+                    </a>
+                  ) : null}
+                </li>
+              </ul>
+            </>
+          )}
         </div>
-        <div className="col-md-9 d-flex justify-content-end">
+        <div className="col-md-6 d-flex justify-content-end">
           {pathname === "admin" ? (
             <Dropdown>
               <Dropdown.Toggle
@@ -96,7 +131,15 @@ export const Navbar = () => {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-          ) : null}
+          ) : (
+            <Link to={pathname === "admin" ? "/admin" : "/dashboard"}>
+              <img
+                src={require("../../assets/img/icon.png")}
+                className="logo"
+                alt=""
+              />
+            </Link>
+          )}
         </div>
       </div>
     </nav>
