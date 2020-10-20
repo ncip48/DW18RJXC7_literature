@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import { UserContext } from "../../context/userContext";
 import { API } from "../../config/api";
 
-export const EditPhotoProfile = () => {
+export const EditPhotoProfile = (props) => {
   const [state, dispatch] = useContext(UserContext);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState("");
@@ -25,6 +25,7 @@ export const EditPhotoProfile = () => {
         type: "UPDATE_PP_SUCCESS",
         payload: res.data.data.user,
       });
+      props.refetch();
     } catch (err) {
       console.log(err.message);
     }

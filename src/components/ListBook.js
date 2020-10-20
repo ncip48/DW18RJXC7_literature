@@ -7,6 +7,7 @@ export const ListBook = ({
   image,
   title,
   author,
+  year,
   isactive,
   myown,
   handleRemove,
@@ -20,6 +21,7 @@ export const ListBook = ({
       fontSize: 22,
       lineHeight: "120.5%",
       marginTop: 10,
+      color: "#ffffff",
       opacity: isactive ? 1 : "0.5",
       marginBottom: 10,
     },
@@ -27,7 +29,7 @@ export const ListBook = ({
       fontFamily: "Poppins",
       fontStyle: "normal",
       fontWeight: "normal",
-      fontSize: 18,
+      fontSize: 16,
       lineHeight: "101.5%",
       margin: 0,
       opacity: isactive ? 1 : "0.5",
@@ -39,7 +41,7 @@ export const ListBook = ({
       className="col-md-3 d-flex flex-column py-3"
       style={{
         cursor: isactive ? "pointer" : "default",
-        backgroundColor: isactive ? "white" : "rgb(196,196,196,0.7)",
+        backgroundColor: isactive ? "transparent" : "rgb(196,196,196,0.7)",
         maxWidth: 230,
       }}
     >
@@ -76,7 +78,10 @@ export const ListBook = ({
           }}
         />
         <h4 style={style.bookTitle}>{title}</h4>
-        <h6 style={style.txtAuthor}>{author}</h6>
+        <div className="d-flex flex-row justify-content-between">
+          <h6 style={style.txtAuthor}>{author}</h6>
+          <h6 style={style.txtAuthor}>{year}</h6>
+        </div>
       </div>
     </div>
   );

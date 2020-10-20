@@ -12,80 +12,90 @@ export const CardProfile = (props) => {
     <div className="card w-100 p-1" style={{ backgroundColor: "#252525" }}>
       <div className="card-body">
         <div className="row">
-          <div className="col-md-9 d-flex justify-content-around flex-column">
-            <div className="d-flex flex-row align-items-center">
-              <FaEnvelope
-                style={{ marginRight: 15 }}
-                size={30}
-                color="#AF2E1C"
-              />
-              <div className="flex-column">
-                <h6 style={style.sub}>{props.email}</h6>
-                <p style={style.subsub}>email</p>
+          {props.loading ? (
+            <h3>Loading...</h3>
+          ) : (
+            <>
+              <div className="col-md-9 d-flex justify-content-around flex-column">
+                <div className="d-flex flex-row align-items-center">
+                  <FaEnvelope
+                    style={{ marginRight: 15 }}
+                    size={30}
+                    color="#AF2E1C"
+                  />
+                  <div className="flex-column">
+                    <h6 style={style.sub}>{props.data.data.data.user.email}</h6>
+                    <p style={style.subsub}>email</p>
+                  </div>
+                </div>
+                <div className="d-flex flex-row align-items-center">
+                  <FaTransgender
+                    style={{ marginRight: 15 }}
+                    size={30}
+                    color="#AF2E1C"
+                  />
+                  <div className="flex-column">
+                    <h6 style={style.sub}>
+                      {props.data.data.data.user.gender}
+                    </h6>
+                    <p style={style.subsub}>Gender</p>
+                  </div>
+                </div>
+                <div className="d-flex flex-row align-items-center">
+                  <FaPhoneAlt
+                    style={{ marginRight: 15 }}
+                    size={30}
+                    color="#AF2E1C"
+                  />
+                  <div className="flex-column">
+                    <h6 style={style.sub}>{props.data.data.data.user.phone}</h6>
+                    <p style={style.subsub}>Mobile Phone</p>
+                  </div>
+                </div>
+                <div className="d-flex flex-row align-items-center">
+                  <FaMapMarkerAlt
+                    style={{ marginRight: 15 }}
+                    size={30}
+                    color="#AF2E1C"
+                  />
+                  <div className="flex-column">
+                    <h6 style={style.sub}>
+                      {props.data.data.data.user.address}
+                    </h6>
+                    <p style={{ ...style.subsub, margin: 0 }}>Address</p>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="d-flex flex-row align-items-center">
-              <FaTransgender
-                style={{ marginRight: 15 }}
-                size={30}
-                color="#AF2E1C"
-              />
-              <div className="flex-column">
-                <h6 style={style.sub}>{props.gender}</h6>
-                <p style={style.subsub}>Gender</p>
+              <div className="col-md-3 d-flex my-2 flex-column justify-content-center align-items-center">
+                <img
+                  alt="book"
+                  className="figure-img img-fluid rounded"
+                  src={
+                    props.data.data.data.user.photoProfile === null
+                      ? require("../../assets/img/blank.png")
+                      : urlAsset.img + props.data.data.data.user.photoProfile
+                  }
+                  style={{ height: 200, width: 200 }}
+                />
+                <div className="form-group">
+                  <label
+                    htmlFor="file"
+                    className="btn btn-no"
+                    style={{
+                      display: "flex",
+                      height: 50,
+                      backgroundColor: "#EE4622",
+                      color: "#ffffff",
+                      alignItems: "center",
+                    }}
+                    onClick={props.handleEdit}
+                  >
+                    Change Photo Picture
+                  </label>
+                </div>
               </div>
-            </div>
-            <div className="d-flex flex-row align-items-center">
-              <FaPhoneAlt
-                style={{ marginRight: 15 }}
-                size={30}
-                color="#AF2E1C"
-              />
-              <div className="flex-column">
-                <h6 style={style.sub}>{props.phone}</h6>
-                <p style={style.subsub}>Mobile Phone</p>
-              </div>
-            </div>
-            <div className="d-flex flex-row align-items-center">
-              <FaMapMarkerAlt
-                style={{ marginRight: 15 }}
-                size={30}
-                color="#AF2E1C"
-              />
-              <div className="flex-column">
-                <h6 style={style.sub}>{props.address}</h6>
-                <p style={{ ...style.subsub, margin: 0 }}>Address</p>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-3 d-flex my-2 flex-column justify-content-center align-items-center">
-            <img
-              alt="book"
-              className="figure-img img-fluid rounded"
-              src={
-                props.photo === null
-                  ? require("../../assets/img/blank.png")
-                  : urlAsset.img + props.photo
-              }
-              style={{ height: 200, width: 200 }}
-            />
-            <div className="form-group">
-              <label
-                htmlFor="file"
-                className="btn btn-no"
-                style={{
-                  display: "flex",
-                  height: 50,
-                  backgroundColor: "#EE4622",
-                  color: "#ffffff",
-                  alignItems: "center",
-                }}
-                onClick={props.handleEdit}
-              >
-                Change Photo Picture
-              </label>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       </div>
     </div>
