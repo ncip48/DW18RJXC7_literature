@@ -6,8 +6,7 @@ import AdminRoute from "./components/AdminRoute";
 import { API, setAuthToken } from "./config/api";
 import { UserContext } from "./context/userContext";
 
-import { Landing } from "./pages/Landing/";
-import Home from "./pages/Home";
+import { Landing, Home } from "./pages";
 import MyLibrary from "./pages/MyLibrary";
 import Book from "./pages/Book";
 import Profile from "./pages/Profile";

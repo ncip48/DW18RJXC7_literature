@@ -66,6 +66,8 @@
   }
 }
 
-.nav-top {
+.nav-top,
+.nav-profile {
+  z-index: 1;
   background-color: #161616 !important;
 }

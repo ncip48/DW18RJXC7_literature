@@ -1,0 +1,9 @@
+.jumbotron-home {
+  height: 100vh !important;
+  width: 100% !important;
+  background-color: #161616 !important;
+  position: fixed !important;
+  border-radius: 0px;
+  z-index: 0;
+  top: 0;
+}
