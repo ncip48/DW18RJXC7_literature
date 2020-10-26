@@ -90,7 +90,7 @@ function AddBook() {
       setShow(true);
     } catch (err) {
       console.log(err);
-      setMessage(err.message);
+      setMessage(err.response.data.error.message);
       setShow(true);
     }
   });
@@ -112,7 +112,7 @@ function AddBook() {
           />
           <CustomTextInput
             name="date"
-            type="text"
+            type="date"
             placeholder="Publication Date"
             {...getFieldProps("date")}
             error={touched.date ? errors.date : ""}

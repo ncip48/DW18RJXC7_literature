@@ -86,12 +86,12 @@ export const AddLiterature = () => {
       formData.append("attache", values.attache);
       formData.append("status", "");
 
-      const res = await API.post("/literature", formData, config);
-      setMessage(res.data.message);
+      await API.post("/literature", formData, config);
+      //setMessage(res.data.message);
       setShow(true);
     } catch (err) {
       console.log(err);
-      setMessage(err.message);
+      setMessage(err.response.data.error.message);
       setShow(true);
     }
   });
@@ -218,9 +218,9 @@ export const AddLiterature = () => {
       </Wrapper>
       <CustomModal show={show} onHide={() => setShow(false)}>
         <h5 style={style.popup}>
-          {message} <br />
-          Thank you for adding your own literature to our website, please wait 1
-          x 24 hours to verify
+          {message
+            ? message
+            : "Thank you for adding your own literature to our website, please wait 1 x 24 hours to verify"}
         </h5>
       </CustomModal>
     </>
