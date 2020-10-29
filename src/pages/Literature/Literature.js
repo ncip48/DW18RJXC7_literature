@@ -33,7 +33,7 @@ export const Literature = () => {
       }
     };
     fetchData("");
-  }, [query]);
+  }, []);
 
   const fetchData = async (year) => {
     try {

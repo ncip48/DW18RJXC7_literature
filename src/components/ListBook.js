@@ -35,6 +35,21 @@ export const ListBook = ({
       opacity: isactive ? 1 : "0.5",
       color: "#929292",
     },
+    txtWaiting: {
+      fontFamily: "Poppins",
+      fontStyle: "normal",
+      fontWeight: "normal",
+      fontSize: 18,
+      lineHeight: "101.5%",
+      margin: 0,
+      opacity: isactive ? 0 : 1,
+      color: "yellow",
+      textAlign: "center",
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+    },
   };
   return (
     <div
@@ -68,6 +83,7 @@ export const ListBook = ({
       <div
         onClick={() => (isactive ? history.push(`/literature/${index}`) : null)}
       >
+        <h6 style={style.txtWaiting}>Waiting to be verified</h6>
         <img
           alt="books"
           className="figure-img img-fluid"
